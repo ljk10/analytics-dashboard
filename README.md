@@ -10,8 +10,8 @@ The primary dashboard is fully complete, deployed, and functional.
 (placeholder: add your dashboard screenshot here)
 ![Live Dashboard Screenshot](https://i.imgur.com/g0P3oXq.png)
 🌐 Live URLs
-* Frontend (Vercel): https://analytics-dashboard-project.vercel.app (Replace with your URL)
-* Backend API: https://analytics-dashboard-project.vercel.app/api (Uses the same base as frontend)
+* Frontend (Vercel): [https://analytics-dashboard-project.vercel.app](https://analytics-dashboard-web-blond.vercel.app/) (Replace with your URL)
+* Backend API: [https://analytics-dashboard-project.vercel.app/api](https://analytics-dashboard-web-blond.vercel.app/) (Uses the same base as frontend)
 * Vanna AI (Hosted): (Not deployed due to environment conflicts)
 📁 Project Structure
 The monorepo is organized into apps and services as required.
