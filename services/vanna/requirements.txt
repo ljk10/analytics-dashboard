@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+SQLAlchemy
+pandas
+groq
+psycopg[binary]
+flask-cors
+vanna @ git+https://github.com/vanna-ai/vanna.git@v2

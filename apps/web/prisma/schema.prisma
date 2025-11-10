@@ -1,0 +1,62 @@
+// This is your Prisma schema file.
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Custom ENUM for invoice status
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+}
+
+// Table for Vendors (e.g., "Musterfirma Müller")
+model Vendor {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique // We use @unique to avoid duplicate vendors
+  address String?
+  taxId   String?
+
+  invoices Invoice[] // A vendor can have many invoices
+}
+
+// Central table for invoices
+model Invoice {
+  id            Int           @id @default(autoincrement())
+  invoiceNumber String        @unique
+  issueDate     DateTime
+  dueDate       DateTime
+  totalAmount   Decimal       @db.Decimal(10, 2)
+  currency      String        @default("EUR")
+  status        InvoiceStatus
+
+  createdAt     DateTime      @default(now())
+
+  // Relation to Vendor
+  vendorId      Int
+  vendor        Vendor        @relation(fields: [vendorId], references: [id])
+
+  // Relation to LineItems
+  lineItems     LineItem[]
+}
+
+// Table for individual line items on each invoice
+model LineItem {
+  id          Int      @id @default(autoincrement())
+  description String
+  quantity    Decimal  @db.Decimal(10, 2)
+  unitPrice   Decimal  @db.Decimal(10, 2)
+
+  // This is the field for your "Spend by Category" chart
+  category    String   
+
+  // Relation to Invoice
+  invoiceId   Int
+  invoice     Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+}
